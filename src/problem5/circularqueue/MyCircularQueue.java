@@ -12,43 +12,42 @@ import problem5.node.*;
 public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
     private Node<E> front = null;
     private Node<E> rear = null;
-    private int size = 0;
+    private int queueSize = 0;
 
     public void giveQueueSize(int size) {
-        this.size = size;
+        this.queueSize = size;
     }
 
     public int getSize() {
-        return size;
+        return queueSize;
     }
 
     public Node<E> createCircularNode(E data) {
         return new Node<>(data);
     }
 
-    private void addFromFront(E data, int size) {
-        if (size <= this.size) {
-            if (size == 0) {
-                front = createCircularNode(data);
-                rear = front;
+    private Node<E> addInQueue(E data, int frameSize) {
+        if (frameSize <= queueSize) {
+            if (front == null) {
+                rear = front = createCircularNode(data);
             } else {
-                rear.setNext(createCircularNode(data));
-                rear = rear.getNext();
+                Node<E> temp = createCircularNode(data);
+                rear.setNext(temp);
+                rear = temp;
             }
-        } else {
-            System.out.println("Sorry can't store data queue underflow please delete some data");
         }
+        return front;
     }
 
     @Override
     public boolean enqueue(E data) {
-        addFromFront(data, size);
+        front = addInQueue(data, queueSize);
         return true;
     }
 
     private void deleteFromQueue() {
         front = front.getNext();
-        size--;
+        queueSize--;
     }
 
     @Override
@@ -62,7 +61,7 @@ public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
         int i = 0;
         System.out.println("[");
         while (response.getNext() != null) {
-            System.out.println(response.getData() + ((i > size - 1) ? "," : ""));
+            System.out.println(response.getData() + ((i > queueSize - 1) ? "," : ""));
             response = response.getNext();
             i++;
         }
