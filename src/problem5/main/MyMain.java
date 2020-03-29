@@ -8,12 +8,9 @@ package problem5.main;
 
 import problem5.circularqueue.MyCircularQueue;
 import problem5.student.PersonClass;
-
 import java.util.Scanner;
 
-//executable class
 public class MyMain {
-
     public static void main(String[] args) {
         functionBehaviour();
     }
@@ -23,14 +20,13 @@ public class MyMain {
         boolean trun = false;
         MyCircularQueue<PersonClass> circularQueue = new MyCircularQueue();
         while (trun != true) {
-            System.out.println("Enter the function number from Menu" +
-                    "1.Add the data in record" +
-                    "2.Delete data from record" +
-                    "3.print record" +
-                    "4.Search for record" +
-                    "5.Exit");
-            int choice = tell.nextInt();
-            switch (choice) {
+            System.out.println("Enter the function number from Menu\n" +
+                    "1.Add the data in record\n" +
+                    "2.Delete data from record\n" +
+                    "3.print record\n" +
+                    "4.Search for record\n" +
+                    "5.Exit\n");
+            switch (tell.nextInt()) {
                 case 1 -> circularQueue.enqueue(new NewEntry().EnterPersonData());
                 case 2 -> circularQueue.dequeue();
                 case 3 -> circularQueue.Traverse();
