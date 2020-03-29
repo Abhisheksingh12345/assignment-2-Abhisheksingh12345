@@ -61,11 +61,11 @@ public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
         int i = 0;
         System.out.println("[");
         while (response.getNext() != null) {
-            System.out.println(response.getData() + ((i > queueSize - 1) ? "," : ""));
+            System.out.println(response.getData() + ", ");
             response = response.getNext();
             i++;
         }
-        System.out.println("[");
+        System.out.println("]");
 
     }
 
