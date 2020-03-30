@@ -11,26 +11,29 @@ import problem1.mybst.MyBinarySearchTree;
 import java.util.Scanner;
 public class MyMain {
     public static void main(String[] args) {
+
         performOperationFunction();
     }
 
     private static void performOperationFunction() {
         MyBinarySearchTree<Integer> treeFamily = new MyBinarySearchTree();
+        int atLease = 3;
         Scanner tell = new Scanner(System.in);
-        System.out.println("How many element do you want to test");
-        int no = tell.nextInt();
-        for (int i = 0; i < no; i++) {
+        System.out.print("How many no do want to add : ");
+        atLease = tell.nextInt();
+        System.out.println("Enter the no's : ");
+        for (int i = 0; i < atLease; i++) {
             treeFamily.add(tell.nextInt());
         }
-        System.out.println("Enter the Order" +
-                "1.preOrder format" +
-                "2.postOrder format");
+        System.out.println("Enter the Order\n" +
+                "1.preOrder format\n" +
+                "2.postOrder format\n");
         int choice = tell.nextInt();
         switch (choice) {
             // here root is first element
-            case 1 -> treeFamily.traversePerOrder(treeFamily.getRoot());
+            case 1 -> treeFamily.traverseViaOrder(choice);
             // here root is last element
-            case 2 -> treeFamily.traversePostOrder(treeFamily.getRoot());
+            case 2 -> treeFamily.traverseViaOrder(choice);
         }
     }
 
