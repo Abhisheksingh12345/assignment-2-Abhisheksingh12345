@@ -156,6 +156,13 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
         return true;
     }
 
+    public void traverseViaOrder(int data) {
+        switch (data) {
+            case 1 -> traversePerOrder(root);
+            case 2 -> traversePostOrder(root);
+        }
+    }
+
     public void traversePostOrder(TreeNode<E> currentNode) {
         if (currentNode != null) {
             traversePostOrder(currentNode.getLeftChild());
