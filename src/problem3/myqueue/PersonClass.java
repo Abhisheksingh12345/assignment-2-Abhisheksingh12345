@@ -1,6 +1,6 @@
 package problem3.myqueue;
 
-public class PersonClass<E> {
+public class PersonClass {
     private long rollNumber;
     private String name;
 

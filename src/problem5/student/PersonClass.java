@@ -12,10 +12,6 @@ public class PersonClass {
     private int age;
     private long rollNo;
 
-
-    public PersonClass(int age, String Name) {
-    }
-
     public String getName() {
         return name;
     }

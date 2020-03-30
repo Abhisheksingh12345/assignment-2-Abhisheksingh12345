@@ -13,12 +13,14 @@ public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
     private Node<E> front = null;
     private Node<E> rear = null;
     private int queueSize = 0;
+    private int noOfEntries = 0;
 
-    public void giveQueueSize(int size) {
-        this.queueSize = size;
+    public int getNoOfEntries() {
+        return noOfEntries;
     }
 
-    public int getSize() {
+    public int setQueueSize(int size) {
+        this.queueSize = size;
         return queueSize;
     }
 
@@ -42,40 +44,54 @@ public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
     @Override
     public boolean enqueue(E data) {
         front = addInQueue(data, queueSize);
+        noOfEntries++;
         return true;
     }
 
-    private void deleteFromQueue() {
+    private Node<E> deleteFromQueue() {
         front = front.getNext();
-        queueSize--;
+        return front;
     }
 
     @Override
     public boolean dequeue() {
-        deleteFromQueue();
+        front = deleteFromQueue();
+        noOfEntries--;
         return false;
     }
 
-    private void TraverseFromQueue() {
+    private boolean TraverseFromQueue(Node<E> front) {
         Node<E> response = front;
-        int i = 0;
-        System.out.println("[");
+        System.out.print("[");
         while (response.getNext() != null) {
-            System.out.println(response.getData() + ", ");
+            System.out.print(response.getData() + ", ");
             response = response.getNext();
-            i++;
         }
-        System.out.println("]");
+        System.out.print(response.getData() + "]\n");
+        return true;
 
+    }
+
+    public E getDataAtIndex(int i) {
+        Node<E> node = getNode(i);
+        return node.getData();
+    }
+
+    private Node<E> getNode(int index) {
+        Node<E> response = front;
+        for (int i = 0; i < index; i++) {
+            response = response.getNext();
+        }
+        return response;
     }
 
     @Override
     public boolean Traverse() {
-        TraverseFromQueue();
+        TraverseFromQueue(front);
         return true;
     }
 
-    private void searchFromQueue(E data) {
+    private void searchFromQueue(E data, Node<E> front) {
         Node<E> response = front;
         boolean found = false;
         while (response != null) {
@@ -87,9 +103,13 @@ public class MyCircularQueue<E> implements MyCircularQueueADT<E> {
         }
     }
 
+    public int getQueueSize() {
+        return queueSize;
+    }
+
     @Override
     public boolean search(E data) {
-        searchFromQueue(data);
+        searchFromQueue(data, front);
         return true;
     }
 }

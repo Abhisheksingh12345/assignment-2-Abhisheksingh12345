@@ -9,9 +9,6 @@ package problem2.main;
 import problem1.mybst.MyBinarySearchTree;
 
 import java.util.Scanner;
-
-// executable class
-// use problem1.mybst.MyBinarySearchTree class for creating binary tree
 public class MyMain {
     public static void main(String[] args) {
         performOperationFunction();
@@ -30,7 +27,9 @@ public class MyMain {
                 "2.postOrder format");
         int choice = tell.nextInt();
         switch (choice) {
+            // here root is first element
             case 1 -> treeFamily.traversePerOrder(treeFamily.getRoot());
+            // here root is last element
             case 2 -> treeFamily.traversePostOrder(treeFamily.getRoot());
         }
     }

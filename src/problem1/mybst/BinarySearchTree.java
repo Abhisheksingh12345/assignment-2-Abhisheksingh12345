@@ -7,7 +7,7 @@ public interface BinarySearchTree<E> {
 
     boolean insert(E data);
 
-    boolean search();
+    boolean search(E data);
 
     boolean traverse();
 }

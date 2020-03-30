@@ -8,88 +8,44 @@ package problem3.myqueue;
 
 import problem3.node.Node;
 
-public class MyPriorityQueue<E> implements PriorityQueueADT<E> {\
-    private Node<E> front = null;
-    private Node<E> rear = null;
-    private int size = 0;
 
-    private void addInQueue(E data, int placeHolder) {
+public class MyPriorityQueue<E> {
+
+    private Node<PersonClass> front = null;
+
+    public void enqueue(PersonClass data) {
+        Node<PersonClass> node = new Node<>(data);
         if (front == null) {
-            /**
-             * node=new Node<>(null,data);
-             * front=node;
-             * rear=node;
-             */
-            front = new Node<>(data, placeHolder);
-            rear = front;
+            front = node;
+        } else if (front.getData().getRollNumber() == node.getData().getRollNumber()) {
+            System.out.println("Duplicate Entry");
         } else {
-            checkPriority(data, placeHolder, front);
-        }
-    }
-
-    /**
-     * this is recursive function
-     * In this function the new node is created by the same name again-again but with different functionalists
-     *
-     * @param data        --> generic type data store the generic data.
-     * @param placeHolder --> Integer value which define the priority of the data
-     * @param response    -->takeover the reference of the front node then changed according to the condition.
-     */
-    private void checkPriority(E data, int placeHolder, Node<E> response) {
-        if (response.getPriorityOfData() < placeHolder) {
-            if (response.getNext() == null) {
-                Node<E> newOne = new Node<>(data, placeHolder);
-                response.setNext(newOne);
-                rear = newOne;
-            } else if (response.getNext().getPriorityOfData() > placeHolder) {
-                Node<E> newOne = new Node<E>(data, placeHolder);
-                newOne.setNext(response.getNext());
-                newOne.setPrevious(response);
+            if (front.getData().getRollNumber() > node.getData().getRollNumber()) {
+                node.setNext(front);
+                front = node;
             } else {
-                checkPriority(data, placeHolder, response.getNext());
-            }
-        } else {
-            if (response.getPrevious() == null) {
-                Node<E> newOne = new Node<>(data, placeHolder);
-                response.setNext(newOne);
-                front = newOne;
-            } else if (response.getPrevious().getPriorityOfData() < placeHolder) {
-                Node<E> newOne = new Node<E>(data, placeHolder);
-                newOne.setNext(response);
-                newOne.setPrevious(response.getNext());
-            } else {
-                checkPriority(data, placeHolder, response.getPrevious());
+                Node<PersonClass> temp = front;
+                Node previous = null;
+                while (temp != null && temp.getData().getRollNumber() < node.getData().getRollNumber()) {
+                    previous = temp;
+                    if (temp.getData().getRollNumber() < node.getData().getRollNumber()) {
+                        temp = temp.getNext();
+                    }
+                }
+                previous.setNext(node);
+                if (temp != null) {
+                    node.setNext(temp);
+                }
             }
         }
-
     }
 
-    @Override
-    public boolean add(E data, int priority) {
-        addInQueue(data, priority);
-        return true;
+    public void peek() {
+        System.out.println(front.getData().getRollNumber() + "  " + front.getData().getName());
     }
 
-    @Override
-    public boolean traverse() {
-        Node<E> responce = front;
-        int i = 0;
-        System.out.print("[");
-        while (responce.getNext() != null) {
-            System.out.print(responce.getNext() + (i < size ? ", " : ""));
-            responce = responce.getNext();
-        }
-        System.out.print("]");
-        return true;
-    }
-
-    @Override
-    public boolean delete(E data) {
-        return false;
-    }
-
-    @Override
-    public boolean search(E data) {
-        return false;
+    public void dequeue() {
+        System.out.println(front.getData().getRollNumber() + "  " + front.getData().getName());
+        front = front.getNext();
     }
 }

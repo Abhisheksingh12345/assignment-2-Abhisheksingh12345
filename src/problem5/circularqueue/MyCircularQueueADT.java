@@ -5,5 +5,7 @@ public interface MyCircularQueueADT<E> {
 
     boolean dequeue();
 
+    boolean Traverse();
+
     boolean search(E data);
 }

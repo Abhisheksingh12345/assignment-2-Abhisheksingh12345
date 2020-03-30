@@ -12,8 +12,12 @@ import problem1.node.TreeNode;
 public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     private TreeNode<E> root = null;
     private int size = 0;
-    private int notContainLeftChild;
+    private int notContainLeftChild = 0;
     private int height = 0;
+
+    public TreeNode<E> getRoot() {
+        return root;
+    }
 
     /**
      * In this adding new Node to the addInFamily function behaves like recursive function
@@ -30,8 +34,9 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
             return new TreeNode<>(data);
         } else if ((Integer) data < (Integer) currentMember.getData()) {
             currentMember.setLeftChild(addInFamily(data, currentMember.getLeftChild()));
-        } else
+        } else {
             currentMember.setRightChild(addInFamily(data, currentMember.getRightChild()));
+        }
         return currentMember;
     }
 
@@ -108,33 +113,46 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
         return false;
     }
 
-    @Override
-    public boolean search() {
-        return false;
-    }
-
     /**
-     * this function check the member from the root member in @param fromTop
-     * program behaviour have if - condition statement and call the leftChild function.
+     * recursive method searchFromFamily
      *
-     * @param fromTop --> store the root member.
+     * @param data          --> given by user
+     * @param currentMember --> position of the currentMember.
+     * @return --> return boolean value of variable result true -> if data is being found false -> if data is being not found.
      */
-    private void printOnlyLeftChildren(TreeNode<E> fromTop) {
-        if (fromTop == null) System.out.println("there are 0 member in the family");
-        else leftChild(fromTop);
-    }
-
-    /**
-     * this is a recursive function which continuously print the childSide-family of tree.
-     *
-     * @param leftSide --> stored root member.
-     */
-    private void leftChild(TreeNode<E> leftSide) {
-        if (leftSide.getData() == null) {
-            System.out.println("these are the left-family member");
+    private boolean searchFromFamily(E data, TreeNode<E> currentMember) {
+        boolean result = false;
+        if (currentMember == null) {
+            System.out.println("There zero member in family ");
         }
-        System.out.println(leftSide.getData());
-        leftChild(leftSide.getLeftChild());
+        if ((Integer) currentMember.getData() == (Integer) data) {
+            result = true;
+        } else if ((Integer) currentMember.getData() < (Integer) data) {
+            searchFromFamily(data, currentMember.getRightChild());
+        } else {
+            searchFromFamily(data, currentMember.getLeftChild());
+        }
+        return result;
+    }
+
+    /**
+     * search data is to search using searchFormFamily parameterised by search data and root reference of the tree.
+     *
+     * @param data --> asked by user of generic type define in main method
+     * @return --> return is boolean type.
+     */
+    @Override
+    public boolean search(E data) {
+        return searchFromFamily(data, root);
+    }
+
+    private void printOnlyLeftChildren(TreeNode<E> currentNode) {
+        if (currentNode == null) {
+            System.out.println("there are no other left member in Family");
+        } else {
+            System.out.println(currentNode.getData());
+            printOnlyLeftChildren(currentNode.getLeftChild());
+        }
     }
 
     @Override
@@ -163,3 +181,5 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
         System.out.println(" " + data);
     }
 }
+
+

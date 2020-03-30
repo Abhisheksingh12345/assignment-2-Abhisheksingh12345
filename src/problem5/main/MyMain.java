@@ -19,8 +19,12 @@ public class MyMain {
         Scanner tell = new Scanner(System.in);
         boolean trun = false;
         MyCircularQueue<PersonClass> circularQueue = new MyCircularQueue();
+        System.out.println("Enter the CircularSize");
+        circularQueue.setQueueSize(tell.nextInt());
+
         while (trun != true) {
-            System.out.println("Enter the function number from Menu\n" +
+
+            System.out.println("\nEnter the function number from Menu\n" +
                     "1.Add the data in record\n" +
                     "2.Delete data from record\n" +
                     "3.print record\n" +
@@ -29,8 +33,9 @@ public class MyMain {
             switch (tell.nextInt()) {
                 case 1 -> circularQueue.enqueue(new NewEntry().EnterPersonData());
                 case 2 -> circularQueue.dequeue();
-                case 3 -> circularQueue.Traverse();
+                case 3 -> new ViewPersonDetail().viewRecord(circularQueue);
                 case 5 -> trun = true;
+                case 4 -> new SearchForStudent().search(circularQueue);
                 default -> System.out.println("sorry wrong input ");
             }
         }
