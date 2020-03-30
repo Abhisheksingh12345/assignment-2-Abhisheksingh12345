@@ -13,7 +13,10 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     private TreeNode<E> root = null;
     private int size = 0;
     private int notContainLeftChild = 0;
-    private int height = 0;
+
+    public int getSize() {
+        return size;
+    }
 
     public TreeNode<E> getRoot() {
         return root;
