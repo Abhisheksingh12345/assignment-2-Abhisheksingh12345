@@ -31,4 +31,17 @@ public class MyQueue<E> {
         return front;
     }
 
+    public void traverse() {
+        print(front);
+    }
+
+    private void print(Node<E> root) {
+        Node<E> response = root;
+        System.out.println("[");
+        while (response.getData() != null) {
+            System.out.println(response.getData() + ",");
+            response = response.getNext();
+        }
+        System.out.println("]");
+    }
 }
