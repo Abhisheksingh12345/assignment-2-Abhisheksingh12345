@@ -5,8 +5,6 @@ public interface BinarySearchTree<E> {
 
     boolean remove(E data);
 
-    boolean insert(E data);
-
     boolean search(E data);
 
     boolean traverse();

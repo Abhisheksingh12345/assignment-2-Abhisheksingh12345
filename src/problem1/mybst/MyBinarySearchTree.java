@@ -108,11 +108,6 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
         return true;
     }
 
-    @Override
-    public boolean insert(E data) {
-        return false;
-    }
-
     /**
      * recursive method searchFromFamily
      *
