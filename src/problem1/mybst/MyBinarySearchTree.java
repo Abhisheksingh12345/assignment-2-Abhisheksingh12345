@@ -89,30 +89,34 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
      * @return --> return result if there are 0 member in family then it return null otherwise return hole concluded tree.
      */
     private TreeNode<E> deleteFromFamily(TreeNode<E> currentMember, E data) {
-        if (currentMember == null) {
-            return null;
-        }
-        if (data.equals(currentMember.getData())) {
-            if (currentMember.getLeftChild() == null && currentMember.getRightChild() == null) {
+        try {
+            if (currentMember == null) {
                 return null;
             }
-            if (currentMember.getRightChild() == null) {
-                return currentMember.getLeftChild();
+            if (data.equals(currentMember.getData())) {
+                if (currentMember.getLeftChild() == null && currentMember.getRightChild() == null) {
+                    return null;
+                }
+                if (currentMember.getRightChild() == null) {
+                    return currentMember.getLeftChild();
+                }
+                if (currentMember.getLeftChild() == null) {
+                    return currentMember.getRightChild();
+                }
+                E smallestValue = findSmallest(currentMember.getRightChild());
+                currentMember.setData(smallestValue);
+                currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), smallestValue));
+                return currentMember;
             }
-            if (currentMember.getLeftChild() == null) {
-                return currentMember.getRightChild();
+            if ((Integer) data < (Integer) currentMember.getData()) {
+                currentMember.setLeftChild(deleteFromFamily(currentMember.getLeftChild(), data));
             }
-            E smallestValue = findSmallest(currentMember.getRightChild());
-            currentMember.setData(smallestValue);
-            currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), smallestValue));
-            return currentMember;
-        }
-        if ((Integer) data < (Integer) currentMember.getData()) {
-            currentMember.setLeftChild(deleteFromFamily(currentMember.getLeftChild(), data));
-        }
-        currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), data));
-        return currentMember;
 
+            currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), data));
+        } catch (NullPointerException e) {
+            System.out.println("there are no root data is found");
+        }
+        return currentMember;
     }
 
     private boolean searchFromFamily(E data, TreeNode<E> currentMember) {
