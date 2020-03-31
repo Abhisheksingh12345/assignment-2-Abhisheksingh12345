@@ -47,11 +47,12 @@ public class MyMain {
                 }
                 case 4 -> {
                     System.out.print("\nEnter the number to search For : ");
-                    boolean found = familyMember.search(tell.nextInt());
+                    int data = tell.nextInt();
+                    boolean found = familyMember.search(data);
                     if (found) {
-                        System.out.println("Sorry member have not found");
+                        System.out.println("Sorry " + data + " is not found");
                     } else {
-                        System.out.print("Your member have been found");
+                        System.out.print("Your " + data + " is been found");
                     }
                 }
                 case 5 -> turnOff = true;
