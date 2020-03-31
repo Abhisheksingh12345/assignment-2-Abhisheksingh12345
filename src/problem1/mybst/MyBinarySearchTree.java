@@ -185,6 +185,22 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     private void visit(E data) {
         System.out.println(" " + data);
     }
+
+    public TreeNode preOrderSuccessor(TreeNode<E> node) {
+        if (node.getLeftChild() != null) {
+            return node.getLeftChild();
+        }
+        TreeNode temp = node.getRightChild();
+        if (temp == null) {
+            TreeNode currParent = node.getParentNode();
+            while (currParent.getRightChild() == null) {
+                currParent = currParent.getParentNode();
+            }
+            return currParent.getRightChild();
+        }
+        return temp;
+    }
+
 }
 
 
