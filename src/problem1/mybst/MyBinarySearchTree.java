@@ -61,35 +61,31 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
      * @param data --> generic type data .
      * @return --> return result if there are 0 member in family then it return null otherwise return hole concluded tree.
      */
-    private TreeNode<E> deleteFromFamily(E data, TreeNode<E> currentMember) {
+    private TreeNode<E> deleteFromFamily(TreeNode<E> currentMember, E data) {
         if (currentMember == null) {
-            System.out.println("there are 0 family member ");
             return null;
         }
         if (data.equals(currentMember.getData())) {
-            //case 1 : no children of the node to be delete
             if (currentMember.getLeftChild() == null && currentMember.getRightChild() == null) {
                 return null;
             }
-            // case 2 : only one child of the node to be deleted
             if (currentMember.getRightChild() == null) {
                 return currentMember.getLeftChild();
             }
             if (currentMember.getLeftChild() == null) {
                 return currentMember.getRightChild();
             }
-            // case 3 : two children of the node to be deleted
             E smallestValue = findSmallest(currentMember.getRightChild());
             currentMember.setData(smallestValue);
-            currentMember.setRightChild(deleteFromFamily(smallestValue, currentMember.getRightChild()));
+            currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), smallestValue));
             return currentMember;
         }
-        if ((Integer) currentMember.getData() < (Integer) data) {
-            deleteFromFamily(data, currentMember.getRightChild());
-        } else {
-            currentMember.setRightChild(deleteFromFamily(data, currentMember.getRightChild()));
+        if ((Integer) data < (Integer) currentMember.getData()) {
+            currentMember.setLeftChild(deleteFromFamily(currentMember.getLeftChild(), data);
         }
+        currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), data));
         return currentMember;
+
     }
 
     /**
@@ -105,7 +101,7 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
 
     @Override
     public boolean remove(E data) {
-        root = deleteFromFamily(data, root);
+        root = deleteFromFamily(root, data);
         size--;
         return true;
     }

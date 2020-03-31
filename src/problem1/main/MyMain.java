@@ -38,7 +38,7 @@ public class MyMain {
                     familyMember.add(tell.nextInt());
                 }
                 case 2 -> {
-                    System.out.print("\nleft Member of family : ");
+                    System.out.print("\nleft Member of family ");
                     familyMember.traverse();
                 }
                 case 3 -> {
@@ -51,7 +51,7 @@ public class MyMain {
                     if (found) {
                         System.out.println("Sorry member have not found");
                     } else {
-                        System.out.println("Your member have been found");
+                        System.out.print("Your member have been found");
                     }
                 }
                 case 5 -> turnOff = true;
