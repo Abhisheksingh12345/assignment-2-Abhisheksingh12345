@@ -9,7 +9,16 @@ package problem1.node;
 public class TreeNode<E> {
     private TreeNode<E> rightChild;
     private TreeNode<E> leftChild;
+    private TreeNode<E> parentNode;
     private E data;
+
+    public TreeNode<E> getParentNode() {
+        return parentNode;
+    }
+
+    public void setParentNode(TreeNode<E> parentNode) {
+        this.parentNode = parentNode;
+    }
 
     public TreeNode<E> getRightChild() {
         return rightChild;
