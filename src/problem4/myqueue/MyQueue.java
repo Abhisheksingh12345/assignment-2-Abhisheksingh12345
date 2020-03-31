@@ -14,7 +14,8 @@ public class MyQueue<E> {
     private Node<E> rear = null;
     private int size = 0;
 
-    public void add(E data) {
+
+    public void enqueue(E data) {
         front = addInQueue(data);
         size++;
     }
