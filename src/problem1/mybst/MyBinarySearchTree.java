@@ -37,9 +37,8 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
             return new TreeNode<>(data);
         } else if ((Integer) data < (Integer) currentMember.getData()) {
             currentMember.setLeftChild(addInFamily(data, currentMember.getLeftChild()));
-        } else {
+        } else
             currentMember.setRightChild(addInFamily(data, currentMember.getRightChild()));
-        }
         return currentMember;
     }
 
@@ -155,6 +154,7 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
 
     @Override
     public boolean traverse() {
+        System.out.println("These are only left node : ");
         printOnlyLeftChildren(root);
         return true;
     }
