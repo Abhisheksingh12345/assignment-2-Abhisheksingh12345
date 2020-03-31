@@ -14,6 +14,9 @@ import problem3.myqueue.PersonClass;
 public class MyMain {
     public static void main(String[] args) {
         MyPriorityQueue<PersonClass> queue = new MyPriorityQueue<>();
+        /**
+         * sample output
+         */
         queue.enqueue(new PersonClass(181500372, "Loki"));
         queue.enqueue(new PersonClass(181500348, "Mayank"));
         queue.enqueue(new PersonClass(181500358, "Halo"));
