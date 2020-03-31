@@ -56,7 +56,7 @@ public class MyMain {
                     }
                 }
                 case 5 -> turnOff = true;
-                default -> throw new IllegalStateException("\nInvalid Input:");
+                default -> System.out.println("sorry wrong input try again :");
             }
         }
     }

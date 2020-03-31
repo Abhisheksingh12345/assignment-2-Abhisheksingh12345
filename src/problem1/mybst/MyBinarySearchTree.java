@@ -118,6 +118,7 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     private boolean searchFromFamily(E data, TreeNode<E> currentMember) {
 
         if ((Integer) currentMember.getData() == (Integer) data) {
+
             searchResult = true;
         }
         if ((Integer) currentMember.getData() < (Integer) data) {
