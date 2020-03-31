@@ -30,11 +30,9 @@ public class MyMain {
             switch (tell.nextInt()) {
                 case 1 -> {
                     circularQueue.enqueue(new NewEntry().EnterPersonData());
-                    size--;
                 }
                 case 2 -> {
                     circularQueue.dequeue();
-                    size++;
                 }
                 case 3 -> new ViewPersonDetail().viewRecord(circularQueue);
                 case 5 -> trun = true;
