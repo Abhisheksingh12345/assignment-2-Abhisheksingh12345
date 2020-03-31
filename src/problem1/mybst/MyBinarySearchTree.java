@@ -116,19 +116,21 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     }
 
     private boolean searchFromFamily(E data, TreeNode<E> currentMember) {
-
-        if ((Integer) currentMember.getData() == (Integer) data) {
-
-            searchResult = true;
-        }
-        if ((Integer) currentMember.getData() < (Integer) data) {
-            if (currentMember.getRightChild() != null) {
-                searchFromFamily(data, currentMember.getRightChild());
+        try {
+            if ((Integer) currentMember.getData() == (Integer) data) {
+                searchResult = true;
             }
-        } else {
-            if (currentMember.getLeftChild() != null) {
-                searchFromFamily(data, currentMember.getLeftChild());
+            if ((Integer) currentMember.getData() < (Integer) data) {
+                if (currentMember.getRightChild() != null) {
+                    searchFromFamily(data, currentMember.getRightChild());
+                }
+            } else {
+                if (currentMember.getLeftChild() != null) {
+                    searchFromFamily(data, currentMember.getLeftChild());
+                }
             }
+        } catch (NullPointerException e) {
+            System.out.println("No root element is found");
         }
         return searchResult;
     }
