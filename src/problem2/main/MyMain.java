@@ -21,6 +21,7 @@ public class MyMain {
     private static void performOperationFunction() {
         MyBinarySearchTree<Integer> treeFamily = new MyBinarySearchTree();
         int atLease = 3;
+        boolean turnOff = false;
         Scanner tell = new Scanner(System.in);
         System.out.print("How many no do want to add : ");
         atLease = tell.nextInt();
@@ -33,19 +34,31 @@ public class MyMain {
          * 1->perOrder format (this function is publicly  define in problem1.msbst.MyBinarySearchTress class)
          * 2-> for postOrder format (this function is publicly  define in problem1.msbst.MyBinarySearchTress class)
          */
-        System.out.println("Enter the Order\n" +
-                "1.preOrder format\n" +
-                "2.postOrder format\n");
-        int choice = tell.nextInt();
-        /**
-         * enhanced switch case is used for choices.
-         */
-        switch (choice) {
-            // here root is first element
-            case 1 -> treeFamily.traverseViaOrder(choice);
-            // here root is last element
-            case 2 -> treeFamily.traverseViaOrder(choice);
+        while (!turnOff) {
+            System.out.println("Enter the Order\n" +
+                    "1.preOrder format\n" +
+                    "2.postOrder format\n");
+            int choice = tell.nextInt();
+            /**
+             * enhanced switch case is used for choices.
+             */
+            switch (choice) {
+                // here root is first element
+                case 1 -> {
+                    treeFamily.traverseViaOrder(choice);
+                    turnOff = true;
+                }
+                // here root is last element
+                case 2 -> {
+                    treeFamily.traverseViaOrder(choice);
+                    turnOff = true;
+                }
+                default -> {
+                    System.out.println("unknown input try again :");
+                }
+            }
         }
     }
-
 }
+
+
