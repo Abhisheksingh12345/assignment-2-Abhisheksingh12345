@@ -25,7 +25,6 @@ public class MyQueue<E> {
         } else {
             Node<E> temp = new Node<>(data);
             rear.setNext(temp);
-            front = rear;
             rear = temp;
         }
         return front;
@@ -37,11 +36,13 @@ public class MyQueue<E> {
 
     private void print(Node<E> root) {
         Node<E> response = root;
-        System.out.println("[");
-        while (response.getData() != null) {
-            System.out.println(response.getData() + ",");
+        int i = 0;
+        System.out.print("[");
+        while (response.getNext() != null) {
+            System.out.print(response.getData() + (i < size ? ", " : ""));
             response = response.getNext();
+            i++;
         }
-        System.out.println("]");
+        System.out.print(response.getData() + "]");
     }
 }
