@@ -28,9 +28,8 @@ public class MyMain {
                     "5.Exit\n");
             System.out.print("Enter the choice : ");
             /**
-             * here I have used enhanced switch case the menu selection
-             * enhanced switch is been introduce in java 13 or later
-             * enhanced switch does not required break keyword.
+             * here I have used enhanced switch case the menu selection enhanced switch is been introduce in java 13 or later enhanced switch does not required break keyword.
+             * here you get only output of the every left node .
              */
             switch (tell.nextInt()) {
                 case 1 -> {
