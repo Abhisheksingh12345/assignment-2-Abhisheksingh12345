@@ -8,6 +8,7 @@ package problem5.main;
 
 import problem5.circularqueue.MyCircularQueue;
 import problem5.student.PersonClass;
+
 import java.util.Scanner;
 
 public class MyMain {
@@ -19,10 +20,6 @@ public class MyMain {
         Scanner tell = new Scanner(System.in);
         boolean trun = false;
         MyCircularQueue<PersonClass> circularQueue = new MyCircularQueue();
-        System.out.println("Enter the CircularSize");
-        circularQueue.setQueueSize(tell.nextInt());
-
-        while (trun != true) {
 
             System.out.println("\nEnter the function number from Menu\n" +
                     "1.Add the data in record\n" +
@@ -31,13 +28,22 @@ public class MyMain {
                     "4.Search for record\n" +
                     "5.Exit\n");
             switch (tell.nextInt()) {
-                case 1 -> circularQueue.enqueue(new NewEntry().EnterPersonData());
-                case 2 -> circularQueue.dequeue();
+                case 1 -> {
+                    circularQueue.enqueue(new NewEntry().EnterPersonData());
+                    size--;
+                }
+                case 2 -> {
+                    circularQueue.dequeue();
+                    size++;
+                }
                 case 3 -> new ViewPersonDetail().viewRecord(circularQueue);
                 case 5 -> trun = true;
                 case 4 -> new SearchForStudent().search(circularQueue);
                 default -> System.out.println("sorry wrong input ");
             }
         }
-    }
+
 }
+}
+
+
