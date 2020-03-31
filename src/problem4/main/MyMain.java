@@ -7,10 +7,15 @@
 package problem4.main;
 
 import problem1.mybst.MyBinarySearchTree;
+import problem1.node.TreeNode;
+import problem4.myqueue.MyQueue;
 
 import java.util.Scanner;
 
 public class MyMain {
+    private static MyBinarySearchTree binaryAccess = new MyBinarySearchTree<>();
+    private static MyQueue<TreeNode> queue = new MyQueue();
+
     public static void main(String[] args) {
         allQueueFunction();
     }
@@ -33,15 +38,21 @@ public class MyMain {
                 exit = true;
             }
         }
-        perOrderSuccess(binaryAccess);
+        perOrderSuccess(binaryAccess.getRoot());
         binaryAccess.traverse();
+        queue.traverse();
     }
 
-    private static void perOrderSuccess(MyBinarySearchTree<Integer> intoQueue) {
-
-        for (int i = 0; i < intoQueue.getSize(); i++) {
-
+    private static void perOrderSuccess(TreeNode node) {
+        if (node != null) {
+            if (binaryAccess.preOrderSuccessor(node) != null) {
+                queue.enqueue(binaryAccess.preOrderSuccessor(node));
+                System.out.println("PreOrder Successor of " + node.getData() + " is : " + binaryAccess.preOrderSuccessor(node).getData());
+            }
+            perOrderSuccess(node.getLeftChild());
+            perOrderSuccess(node.getRightChild());
         }
     }
-
 }
+
+
