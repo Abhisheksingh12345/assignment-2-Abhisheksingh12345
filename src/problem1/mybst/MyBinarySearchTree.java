@@ -55,6 +55,33 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     }
 
     /**
+     * recursive method searchFromFamily
+     *
+     * @param data          --> given by user
+     * @param currentMember --> position of the currentMember.
+     * @return --> return boolean value of variable result true -> if data is being found false -> if data is being not found.
+     */
+    private boolean searchResult = false;
+
+    /**
+     * this function will found out the last children of the family from its forefather or can says its parents-parents
+     * there the tertiary condition which continuously check for last member until the condition is true.
+     *
+     * @param findPOutMember --> make out the last member of the family in leftChildren direction.
+     * @return --> return the last member of the family.
+     */
+    private E findSmallest(TreeNode<E> findPOutMember) {
+        return (findPOutMember.getLeftChild() == null) ? findPOutMember.getData() : findSmallest(findPOutMember.getLeftChild());
+    }
+
+    @Override
+    public boolean remove(E data) {
+        root = deleteFromFamily(root, data);
+        size--;
+        return true;
+    }
+
+    /**
      * this is a recursive function deleteFromFamily.
      * here the data is 1'st find out of family and then called findSmallest member form family (Tree) and then it swapped the order in family .
      *
@@ -81,51 +108,28 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
             return currentMember;
         }
         if ((Integer) data < (Integer) currentMember.getData()) {
-            currentMember.setLeftChild(deleteFromFamily(currentMember.getLeftChild(), data);
+            currentMember.setLeftChild(deleteFromFamily(currentMember.getLeftChild(), data));
         }
         currentMember.setRightChild(deleteFromFamily(currentMember.getRightChild(), data));
         return currentMember;
 
     }
 
-    /**
-     * this function will found out the last children of the family from its forefather or can says its parents-parents
-     * there the tertiary condition which continuously check for last member until the condition is true.
-     *
-     * @param findPOutMember --> make out the last member of the family in leftChildren direction.
-     * @return --> return the last member of the family.
-     */
-    private E findSmallest(TreeNode<E> findPOutMember) {
-        return (findPOutMember.getLeftChild() == null) ? findPOutMember.getData() : findSmallest(findPOutMember.getLeftChild());
-    }
-
-    @Override
-    public boolean remove(E data) {
-        root = deleteFromFamily(root, data);
-        size--;
-        return true;
-    }
-
-    /**
-     * recursive method searchFromFamily
-     *
-     * @param data          --> given by user
-     * @param currentMember --> position of the currentMember.
-     * @return --> return boolean value of variable result true -> if data is being found false -> if data is being not found.
-     */
     private boolean searchFromFamily(E data, TreeNode<E> currentMember) {
-        boolean result = false;
-        if (currentMember == null) {
-            System.out.println("There zero member in family ");
-        }
+
         if ((Integer) currentMember.getData() == (Integer) data) {
-            result = true;
-        } else if ((Integer) currentMember.getData() < (Integer) data) {
-            searchFromFamily(data, currentMember.getRightChild());
-        } else {
-            searchFromFamily(data, currentMember.getLeftChild());
+            searchResult = true;
         }
-        return result;
+        if ((Integer) currentMember.getData() < (Integer) data) {
+            if (currentMember.getRightChild() != null) {
+                searchFromFamily(data, currentMember.getRightChild());
+            }
+        } else {
+            if (currentMember.getLeftChild() != null) {
+                searchFromFamily(data, currentMember.getLeftChild());
+            }
+        }
+        return searchResult;
     }
 
     /**
