@@ -160,10 +160,17 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
         return true;
     }
 
+    /**
+     * these all are the different type printing data of tree
+     * preOrder, postOrder, inOrder these work recursively and visit method print the out of the node.
+     *
+     * @param data
+     */
     public void traverseViaOrder(int data) {
         switch (data) {
-            case 1 -> traversePerOrder(root);
-            case 2 -> traversePostOrder(root);
+            case 1 -> traversePerOrder(getRoot());
+            case 2 -> traversePostOrder(getRoot());
+            default -> System.out.println("wrong input try Again");
         }
     }
 
@@ -176,7 +183,7 @@ public class MyBinarySearchTree<E> implements BinarySearchTree<E> {
     }
 
     public void traversePerOrder(TreeNode<E> currentNode) {
-        if (currentNode == null) {
+        if (currentNode != null) {
             visit(currentNode.getData());
             traversePerOrder(currentNode.getLeftChild());
             traversePerOrder(currentNode.getRightChild());
